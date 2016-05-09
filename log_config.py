@@ -8,7 +8,7 @@ import logging
 log = logging.getLogger('python_logger')
 log.setLevel(logging.DEBUG)
 
-fh = logging.FileHandler('python_project_template.log', 'w')
+fh = logging.FileHandler('python_parse_word_to_ppt.log', 'w')
 fh.setLevel(logging.DEBUG)
 # create console handler with a higher log level
 ch = logging.StreamHandler()
