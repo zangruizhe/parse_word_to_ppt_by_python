@@ -14,6 +14,10 @@ sys.path.append("python_package")
 # sys.path.append('gen-py')
 
 
+#for date
+import datetime
+today = str(datetime.date.today())
+
 # for thread
 import thread
 import time
@@ -36,15 +40,16 @@ DEFAULT_SLIDE=0
 # for word
 from docx import Document
 from docx.shared import Inches as doc_Inches
+from docx.shared import Pt as doc_Pt
 
-TITLE_PREFIX="title:"
+document = Document()
+
+TITLE_PREFIX="Title:"
 
 ENCODING='utf8'
 
 class DocProduct:
-    def __init__(self, ip_add, port):
-        self.ip = ip_add
-        self.port = port
+    def __init__(self):
         self.song_list_ = {}
 
     def GetSongList(self, song_title_list):
@@ -59,8 +64,39 @@ class DocProduct:
         return ret_song_dict
 
 
+    def WriteDoc(self, song_title_list, song_lyric_dict):
+        document = Document("template.docx")
+        for index, title in enumerate(song_title_list):
+            #p = document.add_paragraph(TITLE_PREFIX + title).bold = True
+            p = ""
+            if index == 0:
+                p = document.paragraphs[0]
+            else:
+                p = document.add_paragraph()
+
+            run = p.add_run(TITLE_PREFIX + title)
+            font = run.font
+            font.bold = True
+            #font.name = 'SimSun'
+            font.name = 'Microsoft YaHei'
+            font.size = doc_Pt(12)
+            #p = document.add_paragraph()
+
+            song_lyric_paragraph_list = song_lyric_dict[title]
+
+            for song_lyric_paragraph in song_lyric_paragraph_list:
+                for song_lyric_ in song_lyric_paragraph:
+                    p = document.add_paragraph()
+                    run = p.add_run(song_lyric_)
+                    font = run.font
+                    font.size = doc_Pt(12)
+                p = document.add_paragraph()
+
+        document.save(today + '.docx')
+        return
+
     def ReadDoc(self, name):
-        log.info ("DocProduct:ReadDoc, name:{} ".format(name))
+        log.info ("DocProduct:ReadDoc, name:{} ".format(name.encode(ENCODING)))
         document = Document(name)
         in_the_song = False
         song_tile = ""
@@ -90,8 +126,6 @@ class DocProduct:
                     song_lyric_paragraph_list.append(song_lyric_paragraph)
                     song_lyric_paragraph = []
 
-
-
         if song_tile != "":
             self.song_list_[song_tile] = song_lyric_paragraph_list
             log.info("finish parse song:{} with {} paragraph"
@@ -104,13 +138,12 @@ class DocProduct:
 
 
 class PPTProduct:
-    #def __init__(self, ip_add, port, md_gui):
-    def __init__(self, ip_add, port):
-        self.ip = ip_add
-        self.port = port
+    def __init__(self):
+        return
 
     def AddLyric(self, slide, content_list):
         log.info ("PPTProduct:AddLyric, content:{} ".format(content_list))
+
         shapes = slide.shapes
 
         left = Cm(0.36)
@@ -126,7 +159,7 @@ class PPTProduct:
         # p = text_frame.paragraphs[0]
         # p.text = paragraph_strs[0]
 
-        for para_str in content_list[0:]:
+        for para_str in content_list:
             p = text_frame.add_paragraph()
             p.text = para_str
             p.alignment = PP_ALIGN.CENTER
@@ -141,16 +174,14 @@ class PPTProduct:
 
 
     def AddTitle(self, slide, title):
-        log.info ("PPTProduct:AddTitle, title:{}".format(title, title))
+        log.info ("PPTProduct:AddTitle, title:{}".format(title.encode(ENCODING)))
 
         shapes = slide.shapes
-
         left = Cm(0)
         top = Cm(18)
         width = Cm(25.15)
         height = Cm(1.03)
         shape = shapes.add_textbox(left, top, width, height);
-        # shape.text = "Hello, World!\n test\n test\n"
 
         text_frame = shape.text_frame
         text_frame.clear()  # remove any existing paragraphs, leaving one empty one
@@ -166,26 +197,30 @@ class PPTProduct:
         font.bold = True
         font.italic = None  # cause value to be inherited from theme
         font.color.rgb = RGBColor(0xFD, 0xBF, 0x2D)
-        # font.color.theme_color = MSO_THEME_COLOR.ACCENT_1
 
-    def CreatePPT(self, title, content_list):
-        log.info ("PPTProduct:CreatePPT, title:{} content:{} ".format(title, content_list))
+    def CreatePPT(self, song_title_list, song_dict):
+        log.info ("PPTProduct:CreatePPT, title:{} content:{} ".format(song_title_list, len(song_dict)))
         prs = Presentation("template.pptx")
-        empty_slide_layout = prs.slide_layouts[EMPTY_SLIDE]
-        slide = prs.slides.add_slide(empty_slide_layout)
 
-        self.AddLyric(slide, content_list)
-        self.AddTitle(slide, title)
+        is_first_slide = True
 
-        for shape in slide.placeholders:
-            log.info('%d %s' % (shape.placeholder_format.idx, shape.name))
+        for title in song_title_list:
+            song_lyric_paragraph_list = song_dict[title]
+            for song_lyric_paragraph in song_lyric_paragraph_list:
+                slide = ""
 
-        for shape in slide.shapes:
-            log.info('%s' % shape.shape_type)
+                if is_first_slide == True:
+                    slide = prs.slides[0]
+                    is_first_slide = False
+                else:
+                    empty_slide_layout = prs.slide_layouts[EMPTY_SLIDE]
+                    slide = prs.slides.add_slide(empty_slide_layout)
 
+                self.AddLyric(slide, song_lyric_paragraph)
+                self.AddTitle(slide, title)
 
-        prs.save('20160510.pptx')
-        log.info ("PPTProduct:CreatePPT: test.ppt is save")
+        prs.save(today + '.pptx')
+        log.info ("PPTProduct:CreatePPT: {}.pptx is save".format(today))
 
     def TestCreatePPT(self):
         log.info ("PPTProduct:TestCreatePPT")
@@ -261,32 +296,47 @@ class PPTProduct:
 
 
 
+def ReadSongTitleList(file_name):
+    log.info("ReadSongTitleList from file:{}".format(file_name.encode(ENCODING)))
+    song_title_list = []
+    f = open(file_name, "r")
+    for line in f:
+        if len(line[:-1]):
+            song_title_list.append(line.decode(ENCODING)[:-1])
+
+    log.info("ReadSongTitleList from file:{}, with {} song titles"
+             .format(file_name.encode(ENCODING), len(song_title_list)))
+    f.close()
+    return song_title_list
+
 
 
 if __name__ == "__main__":
     try:
-        values = ['192.168.2.104', 39001]
-        ppt_product = PPTProduct(*values)
+        ppt_product = PPTProduct()
         #thrift_client.Start()
 
+        song_title_list = ReadSongTitleList(u"主日赞美诗歌名.txt")
 
-        paragraph_strs = [
-            u'阿爸阿爸父',
-            u'教会啊你要兴起',
-            u'惟有主的话永长存'
-        ]
 
-        ppt_product.TestCreatePPT()
-        ppt_product.CreatePPT("testtestsetstst", paragraph_strs)
+        log.info(song_title_list)
 
-        doc_product = DocProduct(*values)
-        doc_product.ReadDoc("template.docx")
-        song_lyric_dict = doc_product.GetSongList(paragraph_strs)
-        log.info(song_lyric_dict)
-        # ppt_product.analyze_ppt("template.pptx", "anaylyze.pptx")
-        # while 1:
-        #     time.sleep(5)
-        #     log.info("main heart beat...")
+        # song_title_list = [
+        #     u'阿爸阿爸父',
+        #     u'教会啊你要兴起',
+        #     u'惟有主的话永长存'
+        # ]
+        log.info(song_title_list)
+        doc_product = DocProduct()
+        doc_product.ReadDoc(u"全部诗歌歌词.docx")
+        song_lyric_dict = doc_product.GetSongList(song_title_list)
+        log.info(len(song_lyric_dict))
+
+        if len(song_lyric_dict) :
+            ppt_product.CreatePPT(song_title_list, song_lyric_dict)
+            doc_product.WriteDoc(song_title_list, song_lyric_dict)
+        else:
+            log.warning("can not product song ppt and docx")
     except Exception:
         log.error("Got exception on TestThriftServer:%s", traceback.format_exc() )
 
