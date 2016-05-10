@@ -1,0 +1,151 @@
+2016-05-10 17:42:30,690 INFO [log_config.py: 30] test log
+2016-05-10 17:42:30,798 INFO [parse_word_to_ppt.py: 191] PPTProduct:TestCreatePPT
+2016-05-10 17:42:30,822 INFO [parse_word_to_ppt.py: 210] PPTProduct:TestCreatePPT: test.ppt is save
+2016-05-10 17:42:30,822 INFO [parse_word_to_ppt.py: 172] PPTProduct:CreatePPT, title:testtestsetstst content:[u'\u963f\u7238\u963f\u7238\u7236', u'\u6559\u4f1a\u554a\u4f60\u8981\u5174\u8d77', u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58'] 
+2016-05-10 17:42:30,831 INFO [parse_word_to_ppt.py: 113] PPTProduct:AddLyric, content:[u'\u963f\u7238\u963f\u7238\u7236', u'\u6559\u4f1a\u554a\u4f60\u8981\u5174\u8d77', u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58'] 
+2016-05-10 17:42:30,834 INFO [parse_word_to_ppt.py: 144] PPTProduct:AddTitle, title:testtestsetstst
+2016-05-10 17:42:30,836 INFO [parse_word_to_ppt.py: 184] TEXT_BOX (17)
+2016-05-10 17:42:30,836 INFO [parse_word_to_ppt.py: 184] TEXT_BOX (17)
+2016-05-10 17:42:30,851 INFO [parse_word_to_ppt.py: 188] PPTProduct:CreatePPT: test.ppt is save
+2016-05-10 17:42:30,851 INFO [parse_word_to_ppt.py: 63] DocProduct:ReadDoc, name:template.docx 
+2016-05-10 17:42:30,858 INFO [parse_word_to_ppt.py: 72] enter the song:title:亲爱的兄弟啊
+2016-05-10 17:42:30,858 INFO [parse_word_to_ppt.py: 82] get song_tile:亲爱的兄弟啊
+2016-05-10 17:42:30,858 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:亲爱的兄弟啊
+2016-05-10 17:42:30,858 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:真心祝福你
+2016-05-10 17:42:30,858 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我愿你凡事兴盛
+2016-05-10 17:42:30,858 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:身体健壮
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:正如你的灵魂兴盛一样
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:亲爱的姐妹啊
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:真心祝福妳
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我愿妳凡事兴盛
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:身体健壮
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:正如妳的灵魂兴盛一样
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 72] enter the song:title:一颗谦卑的心
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 76] finish parse song:亲爱的兄弟啊 with 2 paragraph
+2016-05-10 17:42:30,859 INFO [parse_word_to_ppt.py: 82] get song_tile:一颗谦卑的心
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:求祢给我一颗谦卑的心
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:给我一个受教的灵
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:好让我能走在祢的旨意里
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:如同耶稣的生命x2
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:帮助我更多地祷告
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:帮助我更深地依靠
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:单单相信祢深深敬畏祢
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:一生要跟随祢
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 72] enter the song:title:一切歌颂赞美
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 76] finish parse song:一颗谦卑的心 with 2 paragraph
+2016-05-10 17:42:30,860 INFO [parse_word_to_ppt.py: 82] get song_tile:一切歌颂赞美
+2016-05-10 17:42:30,861 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:一切歌颂赞美都归我主我的神
+2016-05-10 17:42:30,861 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:祢是配得歌颂与赞美
+2016-05-10 17:42:30,861 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我们高声呼喊高举耶稣之名
+2016-05-10 17:42:30,861 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:哈利路亚
+2016-05-10 17:42:30,861 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,861 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:赞美主 哈利路亚
+2016-05-10 17:42:30,861 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:赞美主 哈利路亚
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:哈利路亚
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 72] enter the song:title:耶稣求指引我生命道路
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 76] finish parse song:一切歌颂赞美 with 2 paragraph
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 82] get song_tile:耶稣求指引我生命道路
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我要全心跟随
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:谦卑来到主座前
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:向祢献上受伤的心
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我的公义盾牌和力量
+2016-05-10 17:42:30,862 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:祂名是耶稣
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我的道路真理生命耶稣
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有主知道我当行的道路
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:求主熬炼洁净我心
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我必如同精金分别归于祢
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 72] enter the song:title:心灵深处的渴慕
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 76] finish parse song:耶稣求指引我生命道路 with 3 paragraph
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 82] get song_tile:心灵深处的渴慕
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:任何的事物都无法满足
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我心灵深处的渴慕
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:任何的事物都无法满足
+2016-05-10 17:42:30,863 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我饥渴的心深处
+2016-05-10 17:42:30,864 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,864 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有我的耶稣
+2016-05-10 17:42:30,864 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:滋润生命更加丰富
+2016-05-10 17:42:30,864 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有我的耶稣
+2016-05-10 17:42:30,864 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:满足心灵更加喜乐
+2016-05-10 17:42:30,864 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,864 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:活水泉源永不枯竭
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:直涌到永生活水泉源
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我的主永远不改变
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:以心灵和诚实来敬拜祢
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:主耶稣
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 72] enter the song:title:惟有主的话永长存
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 76] finish parse song:心灵深处的渴慕 with 3 paragraph
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 82] get song_tile:惟有主的话永长存
+2016-05-10 17:42:30,865 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:芳草必枯干花朵必凋谢
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有主的话永长存
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:芳草必枯干花朵必凋谢
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有主的话永长存
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:芳草必枯干花朵必凋谢
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有主的话永长存
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:凡愿意相信主话的人
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:他必定能够得救恩
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:凡愿意遵行主话的人
+2016-05-10 17:42:30,866 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:他必要看见主耶稣大能
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有主的话永长存
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有主的话永长存
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有主的话永长存
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:惟有主的话永长存永长存
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 72] enter the song:title:教会啊你要兴起
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 76] finish parse song:惟有主的话永长存 with 3 paragraph
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 82] get song_tile:教会啊你要兴起
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:教会啊你要兴起
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我主正在呼召你
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:放下失败交托一切恐惧
+2016-05-10 17:42:30,867 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:教会啊你要兴起
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:教会啊你要兴起
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我主正在差遣你
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:神呼召我们进入祂的命定
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:教会啊你要兴起
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我们是世上光（照亮一切黑暗）
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:属神的推荐信（彰显神的荣耀）
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:经由主的教会（透过我们）
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:世界将看见主荣光
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:你要兴起因着主伟大的爱
+2016-05-10 17:42:30,868 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:靠着主无限能力
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:彼此合而为一
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:彰显神的能力
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:你要歌唱宣扬主伟大的爱
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:传扬主奇妙作为
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:以生命的诗歌彰显神的慈爱
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:你要兴起
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 72] enter the song:title:阿爸阿爸父
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 76] finish parse song:教会啊你要兴起 with 4 paragraph
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 82] get song_tile:阿爸阿爸父
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:阿爸阿爸父阿爸阿爸父
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:紧紧拥抱我深深注视
+2016-05-10 17:42:30,869 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:我的阿爸阿爸父
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:阿爸阿爸父阿爸阿爸父
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:时常帮助我
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:并赐力量的阿爸父
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:医治忧伤破碎的心灵
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:缠裹无法忍受的伤痛
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:因祂认识我因祂深切了解我
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 86] enter the song lyric paragraph:祂使我的灵魂重新得力
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 89] leave the song lyric paragraph:
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 98] finish parse song:阿爸阿爸父 with 3 paragraph
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 54] get song:阿爸阿爸父, paragraph.num:3
+2016-05-10 17:42:30,870 INFO [parse_word_to_ppt.py: 54] get song:教会啊你要兴起, paragraph.num:4
+2016-05-10 17:42:30,871 INFO [parse_word_to_ppt.py: 54] get song:惟有主的话永长存, paragraph.num:3
+2016-05-10 17:42:30,871 INFO [parse_word_to_ppt.py: 285] {u'\u963f\u7238\u963f\u7238\u7236': [[u'\u963f\u7238\u963f\u7238\u7236\u963f\u7238\u963f\u7238\u7236', u'\u7d27\u7d27\u62e5\u62b1\u6211\u6df1\u6df1\u6ce8\u89c6', u'\u6211\u7684\u963f\u7238\u963f\u7238\u7236'], [u'\u963f\u7238\u963f\u7238\u7236\u963f\u7238\u963f\u7238\u7236', u'\u65f6\u5e38\u5e2e\u52a9\u6211', u'\u5e76\u8d50\u529b\u91cf\u7684\u963f\u7238\u7236'], [u'\u533b\u6cbb\u5fe7\u4f24\u7834\u788e\u7684\u5fc3\u7075', u'\u7f20\u88f9\u65e0\u6cd5\u5fcd\u53d7\u7684\u4f24\u75db', u'\u56e0\u7942\u8ba4\u8bc6\u6211\u56e0\u7942\u6df1\u5207\u4e86\u89e3\u6211', u'\u7942\u4f7f\u6211\u7684\u7075\u9b42\u91cd\u65b0\u5f97\u529b']], u'\u6559\u4f1a\u554a\u4f60\u8981\u5174\u8d77': [[u'\u6559\u4f1a\u554a\u4f60\u8981\u5174\u8d77', u'\u6211\u4e3b\u6b63\u5728\u547c\u53ec\u4f60', u'\u653e\u4e0b\u5931\u8d25\u4ea4\u6258\u4e00\u5207\u6050\u60e7', u'\u6559\u4f1a\u554a\u4f60\u8981\u5174\u8d77'], [u'\u6559\u4f1a\u554a\u4f60\u8981\u5174\u8d77', u'\u6211\u4e3b\u6b63\u5728\u5dee\u9063\u4f60', u'\u795e\u547c\u53ec\u6211\u4eec\u8fdb\u5165\u7942\u7684\u547d\u5b9a', u'\u6559\u4f1a\u554a\u4f60\u8981\u5174\u8d77'], [u'\u6211\u4eec\u662f\u4e16\u4e0a\u5149\uff08\u7167\u4eae\u4e00\u5207\u9ed1\u6697\uff09', u'\u5c5e\u795e\u7684\u63a8\u8350\u4fe1\uff08\u5f70\u663e\u795e\u7684\u8363\u8000\uff09', u'\u7ecf\u7531\u4e3b\u7684\u6559\u4f1a\uff08\u900f\u8fc7\u6211\u4eec\uff09', u'\u4e16\u754c\u5c06\u770b\u89c1\u4e3b\u8363\u5149'], [u'\u4f60\u8981\u5174\u8d77\u56e0\u7740\u4e3b\u4f1f\u5927\u7684\u7231', u'\u9760\u7740\u4e3b\u65e0\u9650\u80fd\u529b', u'\u5f7c\u6b64\u5408\u800c\u4e3a\u4e00', u'\u5f70\u663e\u795e\u7684\u80fd\u529b']], u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58': [[u'\u82b3\u8349\u5fc5\u67af\u5e72\u82b1\u6735\u5fc5\u51cb\u8c22', u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58', u'\u82b3\u8349\u5fc5\u67af\u5e72\u82b1\u6735\u5fc5\u51cb\u8c22', u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58', u'\u82b3\u8349\u5fc5\u67af\u5e72\u82b1\u6735\u5fc5\u51cb\u8c22', u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58'], [u'\u51e1\u613f\u610f\u76f8\u4fe1\u4e3b\u8bdd\u7684\u4eba', u'\u4ed6\u5fc5\u5b9a\u80fd\u591f\u5f97\u6551\u6069', u'\u51e1\u613f\u610f\u9075\u884c\u4e3b\u8bdd\u7684\u4eba', u'\u4ed6\u5fc5\u8981\u770b\u89c1\u4e3b\u8036\u7a23\u5927\u80fd'], [u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58', u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58', u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58', u'\u60df\u6709\u4e3b\u7684\u8bdd\u6c38\u957f\u5b58\u6c38\u957f\u5b58']]}
