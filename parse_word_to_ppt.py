@@ -48,6 +48,9 @@ TITLE_PREFIX="Title:"
 
 ENCODING='utf8'
 
+WIDEST_LINE_IN_PPT=13
+LANGEST_LINE_IN_PPT=6
+
 class DocProduct:
     def __init__(self):
         self.song_list_ = {}
@@ -166,7 +169,11 @@ class PPTProduct:
             p.line_spacing=Pt(75)
             font = p.font
             font.name = 'Microsoft YaHei'
-            font.size = Pt(56)
+            #font.size = Pt(56)
+            if (len(para_str) > WIDEST_LINE_IN_PPT) :
+                font.size = Pt((24.7/len(para_str)) * 28.3464) # 1cm = 28.3464pt
+            else:
+                font.size = Pt(56)
             font.bold = False
             font.italic = None  # cause value to be inherited from theme
             font.color.rgb = RGBColor(0xFD, 0xBF, 0x2D)
