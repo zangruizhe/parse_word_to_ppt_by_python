@@ -94,7 +94,7 @@ class DocProduct:
                 log.debug("get song:{}, paragraph.num:{}".format(title.encode(ENCODING), len(self.song_list_[title]) ))
                 ret_song_dict[title] = self.song_list_[title]
             else:
-                log.warning(u"无法找到\t\"{}\"\t的歌词".format(title.encode(ENCODING)))
+                log.warning(u"无法找到\t\"{}\"\t的歌词".format(title))
                 find_all = False
         return (find_all, ret_song_dict)
 
@@ -433,12 +433,12 @@ if __name__ == "__main__":
 
             if product_ppt == True:
                 if find_all == False:
-                    log.info(u"未找到所有歌词，开始生成:对应PPT Word...\n")
+                    log.info(u"未找到所有歌词，开始生成对应PPT Word...\n")
                 else:
-                    log.info(u"找到所有歌词，开始生成:对应PPT Word...\n")
+                    log.info(u"找到所有歌词，开始生成对应PPT Word...\n")
                 ppt_product.CreatePPT(song_title_list, song_lyric_dict)
                 doc_product.WriteDoc(song_title_list, song_lyric_dict)
-                log.info(u"生成:对应PPT Word: {}.pptx {}.docx...\n".format(today, today))
+                log.info(u"生成对应PPT Word: {}.pptx {}.docx...\n".format(today, today))
         else:
             log.warning(u"找不到所有的歌词")
     except Exception:
