@@ -3,15 +3,14 @@
 
 import traceback
 import os, sys
-sys.path.append("python_package/xlrd/lib/python")
-sys.path.append("python_package")
 
+# check os
+import platform
 
+if platform.system() == "Windows":
+    sys.path.append(os.path.join('python_package', 'lxml_for_win'))
 
-# # for thrift
-# 
-# import sys, glob
-# sys.path.append('gen-py')
+sys.path.append(os.path.join('python_package'))
 
 
 #for date
@@ -44,12 +43,44 @@ from docx.shared import Pt as doc_Pt
 
 document = Document()
 
-TITLE_PREFIX="Title:"
+TITLE_PREFIX="title:"
 
 ENCODING='utf8'
 
 WIDEST_LINE_IN_PPT=13
 LANGEST_LINE_IN_PPT=6
+
+def query_yes_no(question, default="yes"):
+    """Ask a yes/no question via raw_input() and return their answer.
+
+    "question" is a string that is presented to the user.
+    "default" is the presumed answer if the user just hits <Enter>.
+        It must be "yes" (the default), "no" or None (meaning
+        an answer is required of the user).
+
+    The "answer" return value is True for "yes" or False for "no".
+    """
+    valid = {"yes": True, "y": True, "ye": True,
+             "no": False, "n": False}
+    if default is None:
+        prompt = " [y/n] "
+    elif default == "yes":
+        prompt = " [Y/n] "
+    elif default == "no":
+        prompt = " [y/N] "
+    else:
+        raise ValueError("invalid default answer: '%s'" % default)
+
+    while True:
+        sys.stdout.write(question + prompt)
+        choice = raw_input().lower()
+        if default is not None and choice == '':
+            return valid[default]
+        elif choice in valid:
+            return valid[choice]
+        else:
+            sys.stdout.write("Please respond with 'yes' or 'no' "
+                             "(or 'y' or 'n').\n")
 
 class DocProduct:
     def __init__(self):
@@ -57,14 +88,15 @@ class DocProduct:
 
     def GetSongList(self, song_title_list):
         ret_song_dict = {}
+        find_all = True
         for title in song_title_list:
             if title in self.song_list_:
-                log.info("get song:{}, paragraph.num:{}".format(title.encode(ENCODING), len(self.song_list_[title]) ))
+                log.debug("get song:{}, paragraph.num:{}".format(title.encode(ENCODING), len(self.song_list_[title]) ))
                 ret_song_dict[title] = self.song_list_[title]
             else:
-                log.warning("cannot get song:{}".format(title.encode(ENCODING)))
-                return {}
-        return ret_song_dict
+                log.warning(u"无法找到\t\"{}\"\t的歌词".format(title.encode(ENCODING)))
+                find_all = False
+        return (find_all, ret_song_dict)
 
 
     def WriteDoc(self, song_title_list, song_lyric_dict):
@@ -85,7 +117,10 @@ class DocProduct:
             font.size = doc_Pt(12)
             #p = document.add_paragraph()
 
-            song_lyric_paragraph_list = song_lyric_dict[title]
+            song_lyric_paragraph_list = song_lyric_dict.get(title)
+
+            if song_lyric_paragraph_list == None:
+                continue
 
             for song_lyric_paragraph in song_lyric_paragraph_list:
                 for song_lyric_ in song_lyric_paragraph:
@@ -99,7 +134,7 @@ class DocProduct:
         return
 
     def ReadDoc(self, name):
-        log.info ("DocProduct:ReadDoc, name:{} ".format(name.encode(ENCODING)))
+        log.debug ("DocProduct:ReadDoc, name:{} ".format(name.encode(ENCODING)))
         document = Document(name)
         in_the_song = False
         song_tile = ""
@@ -107,31 +142,31 @@ class DocProduct:
         song_lyric_paragraph_list = []
         for paragraph in document.paragraphs:
             text = paragraph.text
-            if TITLE_PREFIX in text:
-                log.info("enter the song:{}".format(text.encode(ENCODING)))
+            if TITLE_PREFIX[:-1] in text.lower():
+                log.debug("enter the song:{}".format(text.encode(ENCODING)))
                 if song_tile != "":
                     self.song_list_[song_tile] = song_lyric_paragraph_list
-                    log.info("finish parse song:{} with {} paragraph"
+                    log.debug("finish parse song:{} with {} paragraph"
                              .format(song_tile.encode(ENCODING), len(self.song_list_[song_tile])))
                     song_lyric_paragraph = []
                     song_lyric_paragraph_list = []
                     song_tile = ""
 
                 song_tile = text[len(TITLE_PREFIX):]
-                log.info ("get song_tile:{}".format(song_tile.encode(ENCODING)))
+                log.debug ("get song_tile:{}".format(song_tile.encode(ENCODING)))
                 in_the_song = True
             elif in_the_song == True:
                 if text != "":
-                    log.info("enter the song lyric paragraph:{}".format(text.encode(ENCODING)))
+                    log.debug("enter the song lyric paragraph:{}".format(text.encode(ENCODING)))
                     song_lyric_paragraph.append(text)
                 elif len(song_lyric_paragraph):
-                    log.info("leave the song lyric paragraph:{}".format(text.encode(ENCODING)))
+                    log.debug("leave the song lyric paragraph:{}".format(text.encode(ENCODING)))
                     song_lyric_paragraph_list.append(song_lyric_paragraph)
                     song_lyric_paragraph = []
 
         if song_tile != "":
             self.song_list_[song_tile] = song_lyric_paragraph_list
-            log.info("finish parse song:{} with {} paragraph"
+            log.debug("finish parse song:{} with {} paragraph"
                      .format(song_tile.encode(ENCODING), len(song_lyric_paragraph_list)))
             song_lyric_paragraph_list = []
             song_tile = ""
@@ -145,12 +180,18 @@ class PPTProduct:
         return
 
     def AddLyric(self, slide, content_list):
-        log.info ("PPTProduct:AddLyric, content:{} ".format(content_list))
+        log.debug ("PPTProduct:AddLyric, content:{} ".format(content_list))
 
         shapes = slide.shapes
 
         left = Cm(0.36)
         top = Cm(3.4)
+
+        if 4 < len(content_list) and len(content_list) < LANGEST_LINE_IN_PPT:
+            top = Cm(1.72)
+        elif len(content_list) == LANGEST_LINE_IN_PPT:
+            top = Cm(0.72)
+
         width = Cm(24.7)
         height = Cm(3.0)
         shape = shapes.add_textbox(left, top, width, height);
@@ -181,7 +222,7 @@ class PPTProduct:
 
 
     def AddTitle(self, slide, title):
-        log.info ("PPTProduct:AddTitle, title:{}".format(title.encode(ENCODING)))
+        log.debug ("PPTProduct:AddTitle, title:{}".format(title.encode(ENCODING)))
 
         shapes = slide.shapes
         left = Cm(0)
@@ -205,32 +246,70 @@ class PPTProduct:
         font.italic = None  # cause value to be inherited from theme
         font.color.rgb = RGBColor(0xFD, 0xBF, 0x2D)
 
+    def CreateSlide(self, song_title_list, song_lyric_paragraph):
+        if is_first_slide == True:
+            slide = prs.slides[0]
+            is_first_slide = False
+        else:
+            empty_slide_layout = prs.slide_layouts[EMPTY_SLIDE]
+            slide = prs.slides.add_slide(empty_slide_layout)
+
+        self.AddLyric(slide, song_lyric_paragraph)
+        self.AddTitle(slide, title)
+
+
     def CreatePPT(self, song_title_list, song_dict):
-        log.info ("PPTProduct:CreatePPT, title:{} content:{} ".format(song_title_list, len(song_dict)))
+        log.debug ("PPTProduct:CreatePPT, title:{} content:{} ".format(song_title_list, len(song_dict)))
         prs = Presentation("template.pptx")
 
         is_first_slide = True
 
         for title in song_title_list:
-            song_lyric_paragraph_list = song_dict[title]
+            song_lyric_paragraph_list = song_dict.get(title)
+            if song_lyric_paragraph_list == None:
+                continue
+
             for song_lyric_paragraph in song_lyric_paragraph_list:
                 slide = ""
 
-                if is_first_slide == True:
-                    slide = prs.slides[0]
-                    is_first_slide = False
-                else:
+
+                if len(song_lyric_paragraph) > LANGEST_LINE_IN_PPT:
+                    pages = len(song_lyric_paragraph) / LANGEST_LINE_IN_PPT
+                    for index in range(0,pages):
+                        if is_first_slide == True:
+                            slide = prs.slides[0]
+                            is_first_slide = False
+                        else:
+                            empty_slide_layout = prs.slide_layouts[EMPTY_SLIDE]
+                            slide = prs.slides.add_slide(empty_slide_layout)
+
+                            self.AddLyric(slide, song_lyric_paragraph[
+                                index * LANGEST_LINE_IN_PPT: (index + 1) * LANGEST_LINE_IN_PPT])
+
+                        self.AddTitle(slide, title)
+
                     empty_slide_layout = prs.slide_layouts[EMPTY_SLIDE]
                     slide = prs.slides.add_slide(empty_slide_layout)
 
-                self.AddLyric(slide, song_lyric_paragraph)
-                self.AddTitle(slide, title)
+                    self.AddLyric(slide, song_lyric_paragraph[ pages * LANGEST_LINE_IN_PPT: ])
+                    self.AddTitle(slide, title)
+                else:
+
+                    if is_first_slide == True:
+                        slide = prs.slides[0]
+                        is_first_slide = False
+                    else:
+                        empty_slide_layout = prs.slide_layouts[EMPTY_SLIDE]
+                        slide = prs.slides.add_slide(empty_slide_layout)
+
+                    self.AddLyric(slide, song_lyric_paragraph)
+                    self.AddTitle(slide, title)
 
         prs.save(today + '.pptx')
-        log.info ("PPTProduct:CreatePPT: {}.pptx is save".format(today))
+        log.debug ("PPTProduct:CreatePPT: {}.pptx is save".format(today))
 
     def TestCreatePPT(self):
-        log.info ("PPTProduct:TestCreatePPT")
+        log.debug ("PPTProduct:TestCreatePPT")
 
         prs = Presentation("template.pptx")
         title_slide_layout = prs.slide_layouts[DEFAULT_SLIDE]
@@ -249,7 +328,7 @@ class PPTProduct:
         # )
 
         prs.save('test.pptx')
-        log.info ("PPTProduct:TestCreatePPT: test.ppt is save")
+        log.debug ("PPTProduct:TestCreatePPT: test.ppt is save")
 
     def analyze_ppt(self, input, output):
         """ Take the input file and analyze the structure.
@@ -284,13 +363,13 @@ class PPTProduct:
         try:
             ret_error="test ping"
             #ret_error = self.client.Ping("python")
-            log.info('Ping(), return:{}'.format(ret_error))
+            log.debug('Ping(), return:{}'.format(ret_error))
         except Exception:
-            log.info(('Get Exception Ping()%s'))
+            log.debug(('Get Exception Ping()%s'))
 
     def PingThread(self):
         while 1:
-            log.info('"test from py thread"')
+            log.debug('"test from py thread"')
             time.sleep(2)
 
 
@@ -299,19 +378,21 @@ class PPTProduct:
         try:
             thread.start_new_thread( self.PingThread, () )
         except:
-            log.info ("Error: unable to start thread")
+            log.debug ("Error: unable to start thread")
 
 
 
 def ReadSongTitleList(file_name):
-    log.info("ReadSongTitleList from file:{}".format(file_name.encode(ENCODING)))
+    log.debug("ReadSongTitleList from file:{}".format(file_name.encode(ENCODING)))
     song_title_list = []
     f = open(file_name, "r")
     for line in f:
         if len(line[:-1]):
-            song_title_list.append(line.decode(ENCODING)[:-1])
+            song_tile = line.decode(ENCODING)[:-1]
+            song_title_list.append(song_tile)
+            log.info(u"读取输入歌曲目录:\t{}".format(song_tile))
 
-    log.info("ReadSongTitleList from file:{}, with {} song titles"
+    log.debug("ReadSongTitleList from file:{}, with {} song titles"
              .format(file_name.encode(ENCODING), len(song_title_list)))
     f.close()
     return song_title_list
@@ -320,32 +401,49 @@ def ReadSongTitleList(file_name):
 
 if __name__ == "__main__":
     try:
-        ppt_product = PPTProduct()
         #thrift_client.Start()
-
-        song_title_list = ReadSongTitleList(u"主日赞美诗歌名.txt")
-
-
-        log.info(song_title_list)
 
         # song_title_list = [
         #     u'阿爸阿爸父',
         #     u'教会啊你要兴起',
         #     u'惟有主的话永长存'
         # ]
-        log.info(song_title_list)
-        doc_product = DocProduct()
-        doc_product.ReadDoc(u"全部诗歌歌词.docx")
-        song_lyric_dict = doc_product.GetSongList(song_title_list)
-        log.info(len(song_lyric_dict))
 
-        if len(song_lyric_dict) :
-            ppt_product.CreatePPT(song_title_list, song_lyric_dict)
-            doc_product.WriteDoc(song_title_list, song_lyric_dict)
+        log.info(u"开始读取:主日赞美诗歌名.txt...\n")
+        song_title_list = ReadSongTitleList(u"主日赞美诗歌名.txt")
+        log.info(u"读取:主日赞美诗歌名.txt 完成...\n")
+        log.debug(song_title_list)
+
+        ppt_product = PPTProduct()
+        doc_product = DocProduct()
+
+        log.info(u"开始读取:全部诗歌歌词.docx...\n")
+        doc_product.ReadDoc(u"全部诗歌歌词.docx")
+        log.info(u"读取:全部诗歌歌词.docx 完成...\n")
+
+        log.info(u"开始查找:对应诗歌歌词...\n")
+        (find_all, song_lyric_dict) = doc_product.GetSongList(song_title_list)
+        log.info(u"查找对应诗歌歌词 完成...\n")
+
+        if len(song_lyric_dict) > 0:
+            product_ppt = True
+            if ( find_all == False):
+                log.info(u"未找到所有的歌词,建议将未找到歌词添加进 \"全部诗歌歌词.docx\" 再重新生成。")
+                product_ppt == query_yes_no(u"是否继续生成歌词PPT 和 word?")
+
+            if product_ppt == True:
+                if find_all == False:
+                    log.info(u"未找到所有歌词，开始生成:对应PPT Word...\n")
+                else:
+                    log.info(u"找到所有歌词，开始生成:对应PPT Word...\n")
+                ppt_product.CreatePPT(song_title_list, song_lyric_dict)
+                doc_product.WriteDoc(song_title_list, song_lyric_dict)
+                log.info(u"生成:对应PPT Word: {}.pptx {}.docx...\n".format(today, today))
         else:
-            log.warning("can not product song ppt and docx")
+            log.warning(u"找不到所有的歌词")
     except Exception:
         log.error("Got exception on TestThriftServer:%s", traceback.format_exc() )
 
-    raw_input("press Enter to exit")
+    print u"输入任意键退出"
+    raw_input()
 
