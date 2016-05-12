@@ -65,7 +65,7 @@ Title:唯有耶稣
 2016-05-12 00:52:13,895 INFO [parse_word_to_ppt.py: 441] 生成:对应PPT Word: 2016-05-12.pptx 2016-05-12.docx...
 
 
-三、问题反馈，如有问题，请将"parse_word_to_ppt.log"发邮件給zangruizhe@126.com，谢谢。
+三、问题反馈，如有问题，请将"log.txt"发邮件給zangruizhe@126.com，谢谢。
 
 神爱世人，愿主内平安。
 

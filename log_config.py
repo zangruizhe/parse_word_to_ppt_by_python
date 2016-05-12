@@ -15,7 +15,7 @@ log.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s %(levelname)-2s [%(filename)s: %(lineno)d] %(message)s')
 
 #save log to file
-fh = logging.FileHandler('parse_word_to_ppt.log', 'w')
+fh = logging.FileHandler('log.txt', 'w')
 fh.setLevel(logging.DEBUG)
 fh.setFormatter(formatter)
 log.addHandler(fh)
