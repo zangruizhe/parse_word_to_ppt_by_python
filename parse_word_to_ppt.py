@@ -4,6 +4,10 @@
 import traceback
 import os, sys
 
+import re
+
+import codecs
+
 # check os
 import platform
 
@@ -12,6 +16,7 @@ if platform.system() == "Windows":
 
 sys.path.append(os.path.join('python_package'))
 
+import re
 
 #for date
 import datetime
@@ -382,13 +387,47 @@ class PPTProduct:
 
 
 
+def CheckFileEncode(file_name):
+    encodings = ['utf-8-sig','utf16', 'gb18030','utf8', 'windows-1250', 'windows-1252']
+    for e in encodings:
+        try:
+            fh = codecs.open(file_name, 'r', encoding=e)
+            fh.readlines()
+            fh.seek(0)
+        except UnicodeDecodeError:
+            log.debug('got unicode error with %s , trying different encoding' % e)
+        else:
+            log.info(u'将使用\"{}\"编码打开文件:{}'.format(e, file_name))
+            return e
+            # break
+    log.warning(u"无法找到该文件格式,将默认使用\"utf8\"格式打开。")
+    return 'uft8'
+
 def ReadSongTitleList(file_name):
+
     log.debug("ReadSongTitleList from file:{}".format(file_name.encode(ENCODING)))
     song_title_list = []
     f = open(file_name, "r")
-    for line in f:
-        if len(line[:-1]):
-            song_tile = line.decode(ENCODING)[:-1]
+    file_encode = CheckFileEncode(file_name)
+    # f = codecs.open(file_name, encoding="gb18030").read()
+    # try:
+    #         # or codecs.open on Python 2
+    #             filedata = open(filename, encoding='UTF-8').read() 
+    # except:
+    #         filedata = open(filename, encoding='other-single-byte-encoding').read() 
+    for index, line in enumerate(f):
+        line = re.sub('[\r\n]','',line)
+        # log.debug(line.decode(file_encode).encode(ENCODING))
+        # log.debug(len(line))
+        # log.debug(type(line))
+        # log.debug(type(line.decode(file_encode).encode(ENCODING)))
+        # log.debug(type(line.decode(file_encode)))
+        if len(line):
+            song_tile = ""
+            # if (index == 0 and file_encode == 'utf8'):
+            #     song_tile = line.decode(file_encode)[1:]
+            # else:
+            song_tile = line.decode(file_encode)
             song_title_list.append(song_tile)
             log.info(u"读取输入歌曲目录:\t{}".format(song_tile))
 
@@ -397,6 +436,18 @@ def ReadSongTitleList(file_name):
     f.close()
     return song_title_list
 
+
+import locale
+
+def guess_notepad_encoding(filepath, default_ansi_encoding=None):
+    with open(filepath, 'rb') as f:
+        data = f.read(3)
+    if data[:2] in ('\xff\xfe', '\xfe\xff'):
+        return 'utf-16'
+    if data == u''.encode('utf-8-sig'):
+        return 'utf-8-sig'
+    # presumably "ANSI"
+    return default_ansi_encoding or locale.getpreferredencoding()
 
 
 if __name__ == "__main__":
@@ -409,10 +460,17 @@ if __name__ == "__main__":
         #     u'惟有主的话永长存'
         # ]
 
+        # print guess_notepad_encoding(u"主日赞美诗歌名.txt")
+        # print "mac", guess_notepad_encoding(u"mac_file.txt")
+
+        # print CheckFileEncode(u"主日赞美诗歌名.txt")
+        # print "mac", CheckFileEncode(u"mac_file.txt")
+
         log.info(u"开始读取:主日赞美诗歌名.txt...\n")
         song_title_list = ReadSongTitleList(u"主日赞美诗歌名.txt")
         log.info(u"读取:主日赞美诗歌名.txt 完成...\n")
         log.debug(song_title_list)
+
 
         ppt_product = PPTProduct()
         doc_product = DocProduct()
@@ -429,7 +487,7 @@ if __name__ == "__main__":
             product_ppt = True
             if ( find_all == False):
                 log.info(u"未找到所有的歌词,建议将未找到歌词添加进 \"全部诗歌歌词.docx\" 再重新生成。")
-                product_ppt == query_yes_no(u"是否继续生成歌词PPT 和 word?")
+                product_ppt = query_yes_no(u"是否继续生成歌词PPT 和 word?")
 
             if product_ppt == True:
                 if find_all == False:
