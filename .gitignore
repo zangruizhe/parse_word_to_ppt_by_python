@@ -1,3 +1,4 @@
-*.log
+*log*
 *.pyc
 2016-*
+.DS_Store

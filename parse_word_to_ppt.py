@@ -8,7 +8,7 @@ import os, sys
 import platform
 
 if platform.system() == "Windows":
-    sys.path.append(os.path.join('python_package', 'lxml_for_win'))
+    sys.path.append(os.path.join('python_package', 'lib_for_win'))
 
 sys.path.append(os.path.join('python_package'))
 
