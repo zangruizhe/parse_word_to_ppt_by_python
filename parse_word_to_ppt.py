@@ -403,7 +403,7 @@ def CheckFileEncode(file_name):
     log.warning(u"无法找到该文件格式,将默认使用\"utf8\"格式打开。")
     return 'uft8'
 
-def ReadSongTitleList(file_name):
+def ReadSongTitleListFromText(file_name):
 
     log.debug("ReadSongTitleList from file:{}".format(file_name.encode(ENCODING)))
     song_title_list = []
@@ -437,6 +437,18 @@ def ReadSongTitleList(file_name):
     return song_title_list
 
 
+def ReadSongTitleListFromDocx(name):
+        log.debug ("ReadSongTitleListFromDocx, name:{} ".format(name.encode(ENCODING)))
+        document = Document(name)
+        song_title_list = []
+        for paragraph in document.paragraphs:
+            text = paragraph.text
+            if text != "":
+                log.info(u"读取输入歌曲目录:\t{}".format(text))
+                song_title_list.append(text)
+        return song_title_list
+
+
 import locale
 
 def guess_notepad_encoding(filepath, default_ansi_encoding=None):
@@ -467,7 +479,7 @@ if __name__ == "__main__":
         # print "mac", CheckFileEncode(u"mac_file.txt")
 
         log.info(u"开始读取:主日赞美诗歌名.txt...\n")
-        song_title_list = ReadSongTitleList(u"主日赞美诗歌名.txt")
+        song_title_list = ReadSongTitleListFromDocx(u"主日赞美诗歌名.docx")
         log.info(u"读取:主日赞美诗歌名.txt 完成...\n")
         log.debug(song_title_list)
 
